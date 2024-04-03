@@ -61,6 +61,8 @@ public class GoClientCodegen extends AbstractGoCodegen {
     protected boolean isGoSubmodule = false;
     protected boolean useOneOfDiscriminatorLookup = false; // use oneOf discriminator's mapping for model lookup
 
+    private static final String testPackageName = "test";
+
     // A cache to efficiently lookup schema `toModelName()` based on the schema Key
     private Map<String, String> schemaKeyToModelNameCache = new HashMap<>();
 
@@ -216,6 +218,8 @@ public class GoClientCodegen extends AbstractGoCodegen {
 
         modelPackage = packageName;
         apiPackage = packageName;
+
+        additionalProperties.put("testPackage", testPackageName);
 
         if (additionalProperties.containsKey(WITH_AWSV4_SIGNATURE)) {
             setWithAWSV4Signature(Boolean.parseBoolean(additionalProperties.get(WITH_AWSV4_SIGNATURE).toString()));
